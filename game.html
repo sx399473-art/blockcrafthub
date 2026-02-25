@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Craft Game</title>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+background:#87CEEB;
+font-family:Arial;
+}
+
+#game{
+display:grid;
+grid-template-columns:repeat(20,40px);
+grid-template-rows:repeat(15,40px);
+position:absolute;
+top:50px;
+left:50%;
+transform:translateX(-50%);
+}
+
+.block{
+width:40px;
+height:40px;
+background:green;
+border:1px solid #000;
+}
+
+.player{
+background:red;
+}
+</style>
+</head>
+<body>
+
+<h2 style="text-align:center;">🎮 Mini Minecraft Style Game</h2>
+
+<div id="game"></div>
+
+<script>
+
+const game = document.getElementById("game");
+
+// إنشاء أرض من بلوكات
+for(let i=0;i<300;i++){
+let block = document.createElement("div");
+block.classList.add("block");
+game.appendChild(block);
+}
+
+// لاعب بسيط
+let player = document.createElement("div");
+player.classList.add("block","player");
+game.appendChild(player);
+
+let position = 0;
+player.style.gridColumn = 1;
+player.style.gridRow = 1;
+
+// حركة اللاعب
+document.addEventListener("keydown",(e)=>{
+if(e.key === "ArrowRight"){
+position++;
+player.style.gridColumn = (position % 20) + 1;
+}
+if(e.key === "ArrowLeft"){
+position--;
+if(position < 0) position = 0;
+player.style.gridColumn = (position % 20) + 1;
+}
+});
+
+</script>
+
+</body>
+</html>
