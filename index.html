@@ -1,45 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>BlockCraft Hub</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlockCraft Hub</title>
 
 <style>
-body{
+*{
 margin:0;
-font-family:Arial;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
 background:#0f0f0f;
 color:white;
-text-align:center;
 }
 
 header{
 background:#1db954;
-padding:25px;
-font-size:30px;
+padding:20px;
+text-align:center;
+font-size:26px;
 font-weight:bold;
 }
 
-.container{
-padding:40px;
+nav{
 display:flex;
-flex-wrap:wrap;
 justify-content:center;
 gap:20px;
+padding:15px;
+background:#111;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+cursor:pointer;
+}
+
+nav a:hover{
+color:#1db954;
+}
+
+section{
+display:none;
+padding:50px;
+text-align:center;
+}
+
+.active{
+display:block;
 }
 
 .card{
 background:#1a1a1a;
-padding:20px;
+padding:25px;
+margin:20px auto;
+width:300px;
 border-radius:15px;
-width:250px;
-box-shadow:0 0 10px #000;
+box-shadow:0 0 15px #000;
 }
 
 button{
 background:#1db954;
 border:none;
-padding:10px 18px;
+padding:12px 20px;
 border-radius:8px;
 cursor:pointer;
 font-weight:bold;
@@ -50,38 +78,67 @@ background:white;
 color:black;
 }
 
-a{
-text-decoration:none;
-color:white;
+footer{
+text-align:center;
+padding:20px;
+background:#111;
+margin-top:40px;
 }
-
 </style>
 </head>
 <body>
 
-<header>
-🚀 BlockCraft Hub
-</header>
+<header>🚀 BlockCraft Hub</header>
 
-<div class="container">
+<nav>
+<a onclick="showSection('home')">Home</a>
+<a onclick="showSection('mods')">Mods</a>
+<a onclick="showSection('download')">Download</a>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="active">
+<h1>🔥 Welcome To BlockCraft Hub</h1>
+<p>Best Minecraft Mods & Tools</p>
+</section>
+
+<!-- MODS -->
+<section id="mods">
+<h1>🔥 Available Mods</h1>
 
 <div class="card">
-<h2>🔥 Survival Mod Pack</h2>
-<p>Best mods for Minecraft survival.</p>
-<a href="https://google.com">
-<a href="mods.html">
-<button style="background:#1db954;padding:15px 30px;border:none;border-radius:10px;font-size:18px;">
-Download Mod
-</button>
+<h2>Survival Mod Pack</h2>
+<p>Improve your survival experience.</p>
+<button onclick="showSection('download')">Download</button>
+</div>
+
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download">
+<h1>🚀 Download Page</h1>
+<p>Click below to download your mod.</p>
+
+<a href="https://example.com">
+<button>Download Now</button>
 </a>
 
-<div class="card">
-<h2>⭐ More Mods</h2>
-<p>Coming Soon...</p>
-<button disabled>Locked</button>
-</div>
+<br><br>
+<button onclick="showSection('mods')">⬅ Back</button>
+</section>
 
-</div>
+<footer>
+© 2026 BlockCraft Hub - All Rights Reserved
+</footer>
+
+<script>
+function showSection(id){
+document.querySelectorAll("section").forEach(sec=>{
+sec.classList.remove("active");
+});
+document.getElementById(id).classList.add("active");
+}
+</script>
 
 </body>
 </html>
