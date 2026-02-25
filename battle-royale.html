@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Battle Royale Alpha</title>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+background:#1e1e1e;
+font-family:Arial;
+color:white;
+}
+
+#game{
+position:relative;
+width:100vw;
+height:100vh;
+background:linear-gradient(#2c3e50,#1e1e1e);
+}
+
+.player{
+width:40px;
+height:40px;
+background:red;
+position:absolute;
+top:50%;
+left:50%;
+border-radius:50%;
+}
+
+.enemy{
+width:30px;
+height:30px;
+background:yellow;
+position:absolute;
+border-radius:50%;
+}
+
+.hp{
+position:absolute;
+top:10px;
+left:10px;
+font-size:20px;
+}
+</style>
+</head>
+<body>
+
+<div id="game">
+<div class="hp">HP: <span id="hp">100</span></div>
+<div class="player" id="player"></div>
+</div>
+
+<script>
+
+const player = document.getElementById("player");
+const hpText = document.getElementById("hp");
+
+let x = window.innerWidth/2;
+let y = window.innerHeight/2;
+let hp = 100;
+
+// حركة اللاعب
+document.addEventListener("keydown",(e)=>{
+if(e.key==="ArrowUp") y -=10;
+if(e.key==="ArrowDown") y +=10;
+if(e.key==="ArrowLeft") x -=10;
+if(e.key==="ArrowRight") x +=10;
+
+player.style.left = x+"px";
+player.style.top = y+"px";
+});
+
+// إنشاء عدو عشوائي
+function spawnEnemy(){
+let enemy = document.createElement("div");
+enemy.classList.add("enemy");
+enemy.style.left = Math.random()*window.innerWidth+"px";
+enemy.style.top = Math.random()*window.innerHeight+"px";
+
+document.getElementById("game").appendChild(enemy);
+
+// ضرر لو لمس اللاعب
+setInterval(()=>{
+let dx = parseInt(enemy.style.left) - x;
+let dy = parseInt(enemy.style.top) - y;
+let distance = Math.sqrt(dx*dx + dy*dy);
+
+if(distance < 40){
+hp -=1;
+hpText.innerText = hp;
+if(hp <=0){
+alert("💀 You Died!");
+location.reload();
+}
+}
+},100);
+}
+
+for(let i=0;i<5;i++){
+spawnEnemy();
+}
+
+</script>
+
+</body>
+</html>
